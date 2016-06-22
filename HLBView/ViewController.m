@@ -21,7 +21,7 @@
     HILView *view = [[HILView alloc] initWithFrame:CGRectMake(100, 100, 100, 120) fontSize:16];
     [view setTitle:@"这是一个测试" titleColor:0x999999];
     [view setImage:@"mm.jpg"];
-//    [view addTarget:self action:@selector(todo)];
+    [view addTarget:self action:@selector(todo)];
     [self.view addSubview:view];
 }
 

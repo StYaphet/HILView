@@ -47,18 +47,17 @@ UIColor *rgbaFromHex(NSInteger hexColor, CGFloat alpha) {
 
 - (void)setImage:(NSString *)image {
     UIImage *img = [UIImage imageNamed:image];
-//    __block UIImage *reImage;
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+    __block UIImage *reImage;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         CGFloat length = MIN(self.frame.size.width, self.frame.size.height);
         UIGraphicsBeginImageContext(CGSizeMake(length, length));
         [img drawInRect:CGRectMake(0, 0, length, length)];
-        _imageView.image = UIGraphicsGetImageFromCurrentImageContext();
+        reImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-//    });
-//    
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        _imageView.image = reImage;
-//    });
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _imageView.image = reImage;
+        });
+    });
 }
 
 - (void)layoutSubviews {
